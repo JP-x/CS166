@@ -307,6 +307,18 @@ public class ProfNetwork {
          "*******************************************************\n");
    }//end Greeting
 
+	public static void placeHeader(String header){
+			System.out.println(
+         "\n\n*******************************************************\n" +
+         "              "+ header + "      	               \n" +
+         "*******************************************************\n");
+	}//end placeHeader
+	public static void placeFooter(String footer){
+		System.out.println(
+				"\n....................................\n"+
+				"9. " + footer);
+	}//end placeFooter
+
    /*
     * Reads the users choice given from the keyboard
     * @int
@@ -373,7 +385,14 @@ public class ProfNetwork {
    }//end
 
    public static void FriendList(ProfNetwork esql){
-   }
+			try{
+					placeHeader("Friends List");
+					String query = String.format("SELECT * FROM WHERE");
+					placeFooter("Go Back");
+			}catch(Exception e){
+				System.err.println(e.getMessage());
+			}
+   }//end
    public static void UpdateProfile(ProfNetwork esql){
    }
    public static void NewMessage(ProfNetwork esql){
