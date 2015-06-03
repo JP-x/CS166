@@ -271,15 +271,14 @@ public class ProfNetwork {
                 System.out.println("2. Update Profile");
                 System.out.println("3. Write a new message");
                 System.out.println("4. Send Friend Request");
-				System.out.println("5. Search Profiles");
+								System.out.println("5. Search Profiles");
                 System.out.println(".........................");
                 System.out.println("9. Log out");
                 switch (readChoice()){
-                   case 1: FriendList(esql, authorisedUser); break;
+                   case 1: FriendList(esql); break;
                    case 2: UpdateProfile(esql); break;
                    case 3: NewMessage(esql); break;
                    case 4: SendRequest(esql); break;
-                   case 5: SearchProfiles(esql); break;
                    case 9: usermenu = false; break;
                    default : System.out.println("Unrecognized choice!"); break;
                 }
@@ -353,8 +352,10 @@ public class ProfNetwork {
          String password = in.readLine();
          System.out.print("\tEnter user email: ");
          String email = in.readLine();
-		 //Creating empty contact\block lists for a user
-		 String query = String.format("INSERT INTO USR (userId, password, email, contact_list) VALUES ('%s','%s','%s')", login, password, email);
+
+	 //Creating empty contact\block lists for a user
+	 String query = String.format("INSERT INTO USR (userId, password, email, contact_list) VALUES ('%s','%s','%s')", login, password, email);
+
          esql.executeUpdate(query);
          System.out.println ("User successfully created!");
       }catch(Exception e){
@@ -372,10 +373,11 @@ public class ProfNetwork {
          String login = in.readLine();
          System.out.print("\tEnter user password: ");
          String password = in.readLine();
+
          String query = String.format("SELECT * FROM USR WHERE userId = '%s' AND password = '%s'", login, password);
          int userNum = esql.executeQuery(query);
-	     if (userNum > 0)
-			return login;
+	      if (userNum > 0)
+		      return login;
         return null;
       }catch(Exception e){
          System.err.println (e.getMessage ());
@@ -383,19 +385,20 @@ public class ProfNetwork {
       }
    }//end
 
-   public static void FriendList(ProfNetwork esql, String currentUser){
-	try{
-		placeHeader("Friends List");
-		String query = String.format("SELECT * FROM CONNECTION_USR WHERE userId = '%s'");
-		placeFooter("Go Back",9);
-	}catch(Exception e){
-		System.err.println(e.getMessage());
-	}
+   public static void FriendList(ProfNetwork esql){
+			try{
+					placeHeader("Friends List");
+					//String query = String.format("SELECT * FROM CONNECTION_USR WHERE userId");
+					placeFooter("Go Back",9);
+			}catch(Exception e){
+				System.err.println(e.getMessage());
+			}
    }//end
 
-   public static void SearchProfiles(ProfNetwork esql){
+   public void SearchProfiles(ProfNetwork esql){
       try{
-        List<List<String>> profileResults = new ArrayList<List<String>>();
+        List<List<String>> result  = new ArrayList<List<String>>();
+        List< List<String> > profileResults = new ArrayList<List<String>>();
         placeHeader("Search Profiles");
         while(profileResults.size() <= 0){
           System.out.println("\tSearch ('cancel' to return): ");
@@ -405,22 +408,24 @@ public class ProfNetwork {
           }
           else{
             String query = String.format("SELECT * FROM USR WHERE name = '%s'", q);
-            profileResults = esql.executeQueryAndReturnResult(query);
+            profileResults = executeQueryAndReturnResult(query);
             if(profileResults.size() <= 0){
               System.out.println("\tNo Results.");            
             }
           }        
         }
         DisplayResults(esql, profileResults);        
+        
+        return;
       }catch(Exception e){
         System.err.println(e.getMessage());
+        return;
       }
-      return;
    }//end
 
-   public static void DisplayResults(ProfNetwork esql, List<List<String>> results){
+   public static void DisplayResults(ProfNetwork esql, List< List<String> > results){
       for(int i = 0; i < results.size(); ++i){
-        //System.out.println(results.get(i));
+        System.out.println(results.get(i));
       }
    }//end
    public static void UpdateProfile(ProfNetwork esql){
