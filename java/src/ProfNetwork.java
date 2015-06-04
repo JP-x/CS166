@@ -11,6 +11,7 @@
  */
 
 
+import java.awt.*;
 import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.Statement;
@@ -24,12 +25,14 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.ArrayList;
 
+
+
 /**
  * This class defines a simple embedded SQL utility class that is designed to
  * work with PostgreSQL JDBC drivers.
  *
  */
-public class ProfNetwork {
+public class ProfNetwork extends Panel{
 
    // reference to physical database connection.
    private Connection _connection = null;
@@ -220,6 +223,7 @@ public class ProfNetwork {
       }//end try
    }//end cleanup
 
+   
    /**
     * The main execution method
     *
@@ -234,7 +238,6 @@ public class ProfNetwork {
             " <dbname> <port> <user>");
          return;
       }//end if
-
       Greeting();
       ProfNetwork esql = null;
       try{
@@ -246,7 +249,14 @@ public class ProfNetwork {
          String dbport = args[1];
          String user = args[2];
          esql = new ProfNetwork (dbname, dbport, user, "");
-
+          //Start GUI
+        Frame frame = new Frame("The Network");
+        frame.add("Center", esql);
+        frame.pack();
+        frame.show();
+        frame.add(new Button("Create user"));
+        frame.add(new Button("Log in"));
+        frame.add(new Button("Exit"));
          boolean keepon = true;
          while(keepon) {
             // These are sample SQL statements
