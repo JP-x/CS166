@@ -1,0 +1,2 @@
+FATAL:  lock file "postmaster.pid" already exists
+HINT:  Is another postmaster (PID 22308) running in data directory "/tmp/think001/data"?

@@ -1,0 +1,1461 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Cannot create GC thread. Out of system resources.
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   In 32 bit mode, the process size limit was hit
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Use 64 bit Java on a 64 bit OS
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (gcTaskThread.cpp:46), pid=8118, tid=47901164640576
+#
+# JRE version: 7.0_17-b02
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (23.7-b01 mixed mode linux-amd64 compressed oops)
+# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0000000011402800):  JavaThread "Unknown thread" [_thread_in_vm, id=8119, stack(0x00002b90dbd71000,0x00002b90dbe72000)]
+
+Stack: [0x00002b90dbd71000,0x00002b90dbe72000],  sp=0x00002b90dbe70840,  free space=1022k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [libjvm.so+0x8a540a]  VMError::report_and_die()+0x2ea
+V  [libjvm.so+0x40abfb]  report_vm_out_of_memory(char const*, int, unsigned long, char const*)+0x9b
+V  [libjvm.so+0x4b78fa]  GCTaskThread::GCTaskThread(GCTaskManager*, unsigned int, unsigned int)+0xfa
+V  [libjvm.so+0x4b62f6]  GCTaskManager::initialize()+0x206
+V  [libjvm.so+0x76075f]  ParallelScavengeHeap::initialize()+0x6cf
+V  [libjvm.so+0x87d7f8]  Universe::initialize_heap()+0xb8
+V  [libjvm.so+0x87fecd]  universe_init()+0x7d
+V  [libjvm.so+0x503d25]  init_globals()+0x65
+V  [libjvm.so+0x867052]  Threads::create_vm(JavaVMInitArgs*, bool*)+0x1e2
+V  [libjvm.so+0x563c34]  JNI_CreateJavaVM+0x74
+C  [libjli.so+0x2f8e]  JavaMain+0x9e
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+
+Other Threads:
+
+=>0x0000000011402800 (exited) JavaThread "Unknown thread" [_thread_in_vm, id=8119, stack(0x00002b90dbd71000,0x00002b90dbe72000)]
+
+VM state:not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (0 events):
+No events
+
+
+Dynamic libraries:
+00400000-00401000 r-xp 00000000 09:00 19079769                           /usr/csshare/pkgs/jdk1.7.0_17/bin/javac
+00600000-00601000 rw-p 00000000 09:00 19079769                           /usr/csshare/pkgs/jdk1.7.0_17/bin/javac
+113f9000-1143b000 rw-p 113f9000 00:00 0                                  [heap]
+80000000-814c0000 rw-p 80000000 00:00 0 
+814c0000-85200000 rw-p 814c0000 00:00 0 
+85200000-85760000 rw-p 85200000 00:00 0 
+85760000-581b60000 rw-p 85760000 00:00 0 
+581b60000-581f60000 rw-p 581b60000 00:00 0 
+581f60000-800000000 rw-p 581f60000 00:00 0 
+3a57200000-3a5721c000 r-xp 00000000 09:00 41615568                       /lib64/ld-2.5.so
+3a5741c000-3a5741d000 r--p 0001c000 09:00 41615568                       /lib64/ld-2.5.so
+3a5741d000-3a5741e000 rw-p 0001d000 09:00 41615568                       /lib64/ld-2.5.so
+3a57600000-3a5774f000 r-xp 00000000 09:00 41618222                       /lib64/libc-2.5.so
+3a5774f000-3a5794f000 ---p 0014f000 09:00 41618222                       /lib64/libc-2.5.so
+3a5794f000-3a57953000 r--p 0014f000 09:00 41618222                       /lib64/libc-2.5.so
+3a57953000-3a57954000 rw-p 00153000 09:00 41618222                       /lib64/libc-2.5.so
+3a57954000-3a57959000 rw-p 3a57954000 00:00 0 
+3a57a00000-3a57a82000 r-xp 00000000 09:00 41618938                       /lib64/libm-2.5.so
+3a57a82000-3a57c81000 ---p 00082000 09:00 41618938                       /lib64/libm-2.5.so
+3a57c81000-3a57c82000 r--p 00081000 09:00 41618938                       /lib64/libm-2.5.so
+3a57c82000-3a57c83000 rw-p 00082000 09:00 41618938                       /lib64/libm-2.5.so
+3a57e00000-3a57e02000 r-xp 00000000 09:00 41618941                       /lib64/libdl-2.5.so
+3a57e02000-3a58002000 ---p 00002000 09:00 41618941                       /lib64/libdl-2.5.so
+3a58002000-3a58003000 r--p 00002000 09:00 41618941                       /lib64/libdl-2.5.so
+3a58003000-3a58004000 rw-p 00003000 09:00 41618941                       /lib64/libdl-2.5.so
+3a58600000-3a58616000 r-xp 00000000 09:00 41619823                       /lib64/libpthread-2.5.so
+3a58616000-3a58816000 ---p 00016000 09:00 41619823                       /lib64/libpthread-2.5.so
+3a58816000-3a58817000 r--p 00016000 09:00 41619823                       /lib64/libpthread-2.5.so
+3a58817000-3a58818000 rw-p 00017000 09:00 41619823                       /lib64/libpthread-2.5.so
+3a58818000-3a5881c000 rw-p 3a58818000 00:00 0 
+3a5be00000-3a5be07000 r-xp 00000000 09:00 41619824                       /lib64/librt-2.5.so
+3a5be07000-3a5c007000 ---p 00007000 09:00 41619824                       /lib64/librt-2.5.so
+3a5c007000-3a5c008000 r--p 00007000 09:00 41619824                       /lib64/librt-2.5.so
+3a5c008000-3a5c009000 rw-p 00008000 09:00 41619824                       /lib64/librt-2.5.so
+3a61800000-3a61815000 r-xp 00000000 09:00 41619843                       /lib64/libnsl-2.5.so
+3a61815000-3a61a14000 ---p 00015000 09:00 41619843                       /lib64/libnsl-2.5.so
+3a61a14000-3a61a15000 r--p 00014000 09:00 41619843                       /lib64/libnsl-2.5.so
+3a61a15000-3a61a16000 rw-p 00015000 09:00 41619843                       /lib64/libnsl-2.5.so
+3a61a16000-3a61a18000 rw-p 3a61a16000 00:00 0 
+2b90dadfe000-2b90dae00000 rw-p 2b90dadfe000 00:00 0 
+2b90dae31000-2b90dae47000 r-xp 00000000 09:00 19079633                   /usr/csshare/pkgs/jdk1.7.0_17/jre/lib/amd64/jli/libjli.so
+2b90dae47000-2b90db047000 ---p 00016000 09:00 19079633                   /usr/csshare/pkgs/jdk1.7.0_17/jre/lib/amd64/jli/libjli.so
+2b90db047000-2b90db048000 rw-p 00016000 09:00 19079633                   /usr/csshare/pkgs/jdk1.7.0_17/jre/lib/amd64/jli/libjli.so
+2b90db048000-2b90db04b000 rw-p 2b90db048000 00:00 0 
+2b90db04b000-2b90dba92000 r-xp 00000000 09:00 19079670                   /usr/csshare/pkgs/jdk1.7.0_17/jre/lib/amd64/server/libjvm.so
+2b90dba92000-2b90dbc92000 ---p 00a47000 09:00 19079670                   /usr/csshare/pkgs/jdk1.7.0_17/jre/lib/amd64/server/libjvm.so
+2b90dbc92000-2b90dbd35000 rw-p 00a47000 09:00 19079670                   /usr/csshare/pkgs/jdk1.7.0_17/jre/lib/amd64/server/libjvm.so
+2b90dbd35000-2b90dbd71000 rw-p 2b90dbd35000 00:00 0 
+2b90dbd71000-2b90dbd74000 ---p 2b90dbd71000 00:00 0 
+2b90dbd74000-2b90dbe72000 rw-p 2b90dbd74000 00:00 0 
+2b90dbe72000-2b90dbe7f000 r-xp 00000000 09:00 19079658                   /usr/csshare/pkgs/jdk1.7.0_17/jre/lib/amd64/libverify.so
+2b90dbe7f000-2b90dc07e000 ---p 0000d000 09:00 19079658                   /usr/csshare/pkgs/jdk1.7.0_17/jre/lib/amd64/libverify.so
+2b90dc07e000-2b90dc080000 rw-p 0000c000 09:00 19079658                   /usr/csshare/pkgs/jdk1.7.0_17/jre/lib/amd64/libverify.so
+2b90dc080000-2b90dc0a9000 r-xp 00000000 09:00 19079655                   /usr/csshare/pkgs/jdk1.7.0_17/jre/lib/amd64/libjava.so
+2b90dc0a9000-2b90dc2a9000 ---p 00029000 09:00 19079655                   /usr/csshare/pkgs/jdk1.7.0_17/jre/lib/amd64/libjava.so
+2b90dc2a9000-2b90dc2ab000 rw-p 00029000 09:00 19079655                   /usr/csshare/pkgs/jdk1.7.0_17/jre/lib/amd64/libjava.so
+2b90dc2ab000-2b90dc2ac000 r--p 2b90dc2ab000 00:00 0 
+2b90dc2ac000-2b90dc2ad000 rw-p 2b90dc2ac000 00:00 0 
+2b90dc2ad000-2b90dc2b5000 rw-s 00000000 09:00 38535618                   /tmp/hsperfdata_jpadi004/8118
+2b90dc2de000-2b90dc2e8000 r-xp 00000000 09:00 41618949                   /lib64/libnss_files-2.5.so
+2b90dc2e8000-2b90dc4e7000 ---p 0000a000 09:00 41618949                   /lib64/libnss_files-2.5.so
+2b90dc4e7000-2b90dc4e8000 r--p 00009000 09:00 41618949                   /lib64/libnss_files-2.5.so
+2b90dc4e8000-2b90dc4e9000 rw-p 0000a000 09:00 41618949                   /lib64/libnss_files-2.5.so
+2b90dc4e9000-2b90dc4f3000 r-xp 00000000 09:00 41618940                   /lib64/libnss_nis-2.5.so
+2b90dc4f3000-2b90dc6f2000 ---p 0000a000 09:00 41618940                   /lib64/libnss_nis-2.5.so
+2b90dc6f2000-2b90dc6f3000 r--p 00009000 09:00 41618940                   /lib64/libnss_nis-2.5.so
+2b90dc6f3000-2b90dc6f4000 rw-p 0000a000 09:00 41618940                   /lib64/libnss_nis-2.5.so
+2b90dc6f4000-2b90dc70e000 r-xp 00000000 09:00 19079618                   /usr/csshare/pkgs/jdk1.7.0_17/jre/lib/amd64/libzip.so
+2b90dc70e000-2b90dc90e000 ---p 0001a000 09:00 19079618                   /usr/csshare/pkgs/jdk1.7.0_17/jre/lib/amd64/libzip.so
+2b90dc90e000-2b90dc90f000 rw-p 0001a000 09:00 19079618                   /usr/csshare/pkgs/jdk1.7.0_17/jre/lib/amd64/libzip.so
+2b90dc90f000-2b90dcb7f000 rwxp 2b90dc90f000 00:00 0 
+2b90dcb7f000-2b90df90f000 rw-p 2b90dcb7f000 00:00 0 
+2b90df90f000-2b90df919000 rw-p 2b90df90f000 00:00 0 
+2b90df919000-2b90df9cf000 rw-p 2b90df919000 00:00 0 
+2b90df9cf000-2b90df9da000 rw-p 2b90df9cf000 00:00 0 
+2b90df9da000-2b90df9f8000 rw-p 2b90df9da000 00:00 0 
+2b90df9f8000-2b90df9fb000 rw-p 2b90df9f8000 00:00 0 
+2b90df9fb000-2b90e21dc000 rw-p 2b90df9fb000 00:00 0 
+2b90e21dc000-2b90e21df000 rw-p 2b90e21dc000 00:00 0 
+2b90e21df000-2b90e35cf000 rw-p 2b90e21df000 00:00 0 
+2b90e35cf000-2b90e35d3000 rw-p 2b90e35cf000 00:00 0 
+2b90e35d3000-2b90e5db5000 rw-p 2b90e35d3000 00:00 0 
+2b90e5db5000-2b90e5dc0000 rw-p 2b90e5db5000 00:00 0 
+2b90e5dc0000-2b90e5dde000 rw-p 2b90e5dc0000 00:00 0 
+2b90e5dde000-2b90e5ddf000 ---p 2b90e5dde000 00:00 0 
+2b90e5ddf000-2b90e5edf000 rw-p 2b90e5ddf000 00:00 0 
+2b90e5edf000-2b90e5ee0000 ---p 2b90e5edf000 00:00 0 
+2b90e5ee0000-2b90e5fe0000 rw-p 2b90e5ee0000 00:00 0 
+2b90e5fe0000-2b90e5fe1000 ---p 2b90e5fe0000 00:00 0 
+2b90e5fe1000-2b90e60e1000 rw-p 2b90e5fe1000 00:00 0 
+2b90e60e1000-2b90e60e2000 ---p 2b90e60e1000 00:00 0 
+2b90e60e2000-2b90e61e2000 rw-p 2b90e60e2000 00:00 0 
+2b90e61e2000-2b90e61e3000 ---p 2b90e61e2000 00:00 0 
+2b90e61e3000-2b90e62e3000 rw-p 2b90e61e3000 00:00 0 
+2b90e62e3000-2b90e62e4000 ---p 2b90e62e3000 00:00 0 
+2b90e62e4000-2b90e63e4000 rw-p 2b90e62e4000 00:00 0 
+2b90e63e4000-2b90e63e5000 ---p 2b90e63e4000 00:00 0 
+2b90e63e5000-2b90e64e5000 rw-p 2b90e63e5000 00:00 0 
+2b90e64e5000-2b90e64e6000 ---p 2b90e64e5000 00:00 0 
+2b90e64e6000-2b90e65e6000 rw-p 2b90e64e6000 00:00 0 
+2b90e65e6000-2b90e65e7000 ---p 2b90e65e6000 00:00 0 
+2b90e65e7000-2b90e66e7000 rw-p 2b90e65e7000 00:00 0 
+2b90e66e7000-2b90e66e8000 ---p 2b90e66e7000 00:00 0 
+2b90e66e8000-2b90e67e8000 rw-p 2b90e66e8000 00:00 0 
+2b90e67e8000-2b90e67e9000 ---p 2b90e67e8000 00:00 0 
+2b90e67e9000-2b90e68e9000 rw-p 2b90e67e9000 00:00 0 
+2b90e68e9000-2b90e68ea000 ---p 2b90e68e9000 00:00 0 
+2b90e68ea000-2b90e6be3000 rw-p 2b90e68ea000 00:00 0 
+7fff06012000-7fff06027000 rw-p 7ffffffe9000 00:00 0                      [stack]
+7fff060e3000-7fff060e6000 r-xp 7fff060e3000 00:00 0                      [vdso]
+ffffffffff600000-ffffffffffe00000 ---p 00000000 00:00 0                  [vsyscall]
+
+VM Arguments:
+jvm_args: -Dapplication.home=/usr/csshare/pkgs/jdk1.7.0_17 -Xms8m 
+java_command: com.sun.tools.javac.Main -d /tmp/jpadi004/CS166_Project/java/scripts/../classes /tmp/jpadi004/CS166_Project/java/scripts/../src/ProfNetwork.java
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=/usr/csshare/pkgs/jdk1.7.0_17
+PATH=/usr/csshare/pkgs/jdk1.7.0_17/bin:/home/csmajs/jpadi004/bin:/usr/csshare/bin:/usr/csshare/sbin:/usr/bin/:/bin:/usr/local/bin:/usr/ucb:/sbin:/usr/sbin:/usr/local/sbin:/usr/bin/X11:/usr/X11R6/bin:/usr/local/X11:/usr/local/bin/X11:/usr/openwin/bin:.
+SHELL=/bin/bash
+DISPLAY=:1010.0
+
+Signal Handlers:
+SIGSEGV: [libjvm.so+0x8a5d70], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGBUS: [libjvm.so+0x8a5d70], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGFPE: [libjvm.so+0x741e50], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGPIPE: [libjvm.so+0x741e50], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGXFSZ: [libjvm.so+0x741e50], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGILL: [libjvm.so+0x741e50], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGUSR1: SIG_DFL, sa_mask[0]=0x00000000, sa_flags=0x00000000
+SIGUSR2: [libjvm.so+0x7417a0], sa_mask[0]=0x00000000, sa_flags=0x10000004
+SIGHUP: SIG_DFL, sa_mask[0]=0x00000000, sa_flags=0x00000000
+SIGINT: SIG_DFL, sa_mask[0]=0x00000000, sa_flags=0x00000000
+SIGTERM: SIG_DFL, sa_mask[0]=0x00000000, sa_flags=0x00000000
+SIGQUIT: SIG_IGN, sa_mask[0]=0x00000000, sa_flags=0x00000000
+
+
+---------------  S Y S T E M  ---------------
+
+OS:CentOS release 5.11 (Final)
+
+uname:Linux 2.6.18-404.el5 #1 SMP Tue Apr 7 12:42:54 EDT 2015 x86_64
+libc:glibc 2.5 NPTL 2.5 
+rlimit: STACK 10240k, CORE 0k, NPROC 150, NOFILE 800, AS infinity
+load average:0.78 0.46 0.50
+
+/proc/meminfo:
+MemTotal:     264285368 kB
+MemFree:      236047848 kB
+Buffers:        677852 kB
+Cached:       24231304 kB
+SwapCached:          0 kB
+Active:       16040416 kB
+Inactive:     10608264 kB
+HighTotal:           0 kB
+HighFree:            0 kB
+LowTotal:     264285368 kB
+LowFree:      236047848 kB
+SwapTotal:    23438072 kB
+SwapFree:     23438072 kB
+Dirty:            9624 kB
+Writeback:           0 kB
+AnonPages:     1739440 kB
+Mapped:         304180 kB
+Slab:          1262312 kB
+PageTables:     188432 kB
+NFS_Unstable:        0 kB
+Bounce:              0 kB
+CommitLimit:  155580756 kB
+Committed_AS:  5594036 kB
+VmallocTotal: 34359738367 kB
+VmallocUsed:    277604 kB
+VmallocChunk: 34359457863 kB
+HugePages_Total:     0
+HugePages_Free:      0
+HugePages_Rsvd:      0
+Hugepagesize:     2048 kB
+
+
+CPU:total 48 (12 cores per cpu, 1 threads per core) family 16 model 9 stepping 1, cmov, cx8, fxsr, mmx, sse, sse2, sse3, popcnt, mmxext, 3dnowpref, lzcnt, sse4a, tsc, tscinvbit, tscinv
+
+/proc/cpuinfo:
+processor	: 0
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 1
+siblings	: 12
+core id		: 0
+cpu cores	: 12
+apicid		: 16
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3799.99
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 1
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 1
+siblings	: 12
+core id		: 1
+cpu cores	: 12
+apicid		: 17
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3801.26
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 2
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 1
+siblings	: 12
+core id		: 2
+cpu cores	: 12
+apicid		: 18
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3801.39
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 3
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 1
+siblings	: 12
+core id		: 3
+cpu cores	: 12
+apicid		: 19
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3801.79
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 4
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 1
+siblings	: 12
+core id		: 4
+cpu cores	: 12
+apicid		: 20
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3800.01
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 5
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 1
+siblings	: 12
+core id		: 5
+cpu cores	: 12
+apicid		: 21
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3800.03
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 6
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 1
+siblings	: 12
+core id		: 0
+cpu cores	: 12
+apicid		: 22
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3800.04
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 7
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 1
+siblings	: 12
+core id		: 1
+cpu cores	: 12
+apicid		: 23
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3800.03
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 8
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 1
+siblings	: 12
+core id		: 2
+cpu cores	: 12
+apicid		: 24
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3800.05
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 9
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 1
+siblings	: 12
+core id		: 3
+cpu cores	: 12
+apicid		: 25
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3799.58
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 10
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 1
+siblings	: 12
+core id		: 4
+cpu cores	: 12
+apicid		: 26
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3798.48
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 11
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 1
+siblings	: 12
+core id		: 5
+cpu cores	: 12
+apicid		: 27
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3799.04
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 12
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 2
+siblings	: 12
+core id		: 0
+cpu cores	: 12
+apicid		: 32
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3800.62
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 13
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 2
+siblings	: 12
+core id		: 1
+cpu cores	: 12
+apicid		: 33
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3800.10
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 14
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 2
+siblings	: 12
+core id		: 2
+cpu cores	: 12
+apicid		: 34
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3800.33
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 15
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 2
+siblings	: 12
+core id		: 3
+cpu cores	: 12
+apicid		: 35
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3803.26
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 16
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 2
+siblings	: 12
+core id		: 4
+cpu cores	: 12
+apicid		: 36
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3800.62
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 17
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 2
+siblings	: 12
+core id		: 5
+cpu cores	: 12
+apicid		: 37
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3800.62
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 18
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 2
+siblings	: 12
+core id		: 0
+cpu cores	: 12
+apicid		: 38
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3801.58
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 19
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 2
+siblings	: 12
+core id		: 1
+cpu cores	: 12
+apicid		: 39
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3800.66
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 20
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 2
+siblings	: 12
+core id		: 2
+cpu cores	: 12
+apicid		: 40
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3798.91
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 21
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 2
+siblings	: 12
+core id		: 3
+cpu cores	: 12
+apicid		: 41
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3802.02
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 22
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 2
+siblings	: 12
+core id		: 4
+cpu cores	: 12
+apicid		: 42
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3801.17
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 23
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 2
+siblings	: 12
+core id		: 5
+cpu cores	: 12
+apicid		: 43
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3801.14
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 24
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 3
+siblings	: 12
+core id		: 0
+cpu cores	: 12
+apicid		: 48
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3802.00
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 25
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 3
+siblings	: 12
+core id		: 1
+cpu cores	: 12
+apicid		: 49
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3802.02
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 26
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 3
+siblings	: 12
+core id		: 2
+cpu cores	: 12
+apicid		: 50
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3801.30
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 27
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 3
+siblings	: 12
+core id		: 3
+cpu cores	: 12
+apicid		: 51
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3800.48
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 28
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 3
+siblings	: 12
+core id		: 4
+cpu cores	: 12
+apicid		: 52
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3800.15
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 29
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 3
+siblings	: 12
+core id		: 5
+cpu cores	: 12
+apicid		: 53
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3800.30
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 30
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 3
+siblings	: 12
+core id		: 0
+cpu cores	: 12
+apicid		: 54
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3802.47
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 31
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 3
+siblings	: 12
+core id		: 1
+cpu cores	: 12
+apicid		: 55
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3802.69
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 32
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 3
+siblings	: 12
+core id		: 2
+cpu cores	: 12
+apicid		: 56
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3802.14
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 33
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 3
+siblings	: 12
+core id		: 3
+cpu cores	: 12
+apicid		: 57
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3799.76
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 34
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 3
+siblings	: 12
+core id		: 4
+cpu cores	: 12
+apicid		: 58
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3804.90
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 35
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 3
+siblings	: 12
+core id		: 5
+cpu cores	: 12
+apicid		: 59
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3800.90
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 36
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 4
+siblings	: 12
+core id		: 0
+cpu cores	: 12
+apicid		: 64
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3801.37
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 37
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 4
+siblings	: 12
+core id		: 1
+cpu cores	: 12
+apicid		: 65
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3802.47
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 38
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 4
+siblings	: 12
+core id		: 2
+cpu cores	: 12
+apicid		: 66
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3801.88
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 39
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 4
+siblings	: 12
+core id		: 3
+cpu cores	: 12
+apicid		: 67
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3802.68
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 40
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 4
+siblings	: 12
+core id		: 4
+cpu cores	: 12
+apicid		: 68
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3801.83
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 41
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 4
+siblings	: 12
+core id		: 5
+cpu cores	: 12
+apicid		: 69
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3802.36
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 42
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 4
+siblings	: 12
+core id		: 0
+cpu cores	: 12
+apicid		: 70
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3802.35
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 43
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 4
+siblings	: 12
+core id		: 1
+cpu cores	: 12
+apicid		: 71
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3802.65
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 44
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 4
+siblings	: 12
+core id		: 2
+cpu cores	: 12
+apicid		: 72
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3801.88
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 45
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 4
+siblings	: 12
+core id		: 3
+cpu cores	: 12
+apicid		: 73
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3803.53
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 46
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 4
+siblings	: 12
+core id		: 4
+cpu cores	: 12
+apicid		: 74
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3801.98
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+processor	: 47
+vendor_id	: AuthenticAMD
+cpu family	: 16
+model		: 9
+model name	: AMD Opteron(tm) Processor 6168
+stepping	: 1
+cpu MHz		: 1900.000
+cache size	: 512 KB
+physical id	: 4
+siblings	: 12
+core id		: 5
+cpu cores	: 12
+apicid		: 75
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm 3dnowext 3dnow rep_good constant_tsc nonstop_tsc amd_dcm pni cx16 popcnt lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt nodeid_msr
+bogomips	: 3804.86
+TLB size	: 1024 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm stc 100mhzsteps hwpstate [8]
+
+
+
+Memory: 4k page, physical 264285368k(236047848k free), swap 23438072k(23438072k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (23.7-b01) for linux-amd64 JRE (1.7.0_17-b02), built on Mar  1 2013 02:59:06 by "java_re" with gcc 4.3.0 20080428 (Red Hat 4.3.0-8)
+
+time: Wed May 27 18:38:50 2015
+elapsed time: 0 seconds
+
