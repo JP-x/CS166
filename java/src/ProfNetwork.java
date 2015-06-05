@@ -32,7 +32,7 @@ import java.util.ArrayList;
  * work with PostgreSQL JDBC drivers.
  *
  */
-public class ProfNetwork extends Panel{
+public class ProfNetwork{
 
    // reference to physical database connection.
    private Connection _connection = null;
@@ -250,13 +250,28 @@ public class ProfNetwork extends Panel{
          String user = args[2];
          esql = new ProfNetwork (dbname, dbport, user, "");
           //Start GUI
+        /*
         Frame frame = new Frame("The Network");
+        frame.setSize(640,480);
         frame.add("Center", esql);
-        frame.pack();
+        Button b1 = new Button("Create user");
+        Button b2 = new Button("Log in");
+        Button b3 = new Button("Exit");
+        //setBounds(x,y,width,height
+        b1.setBounds(30,100,80,30);
+        b2.setBounds(30,200,80,30);
+        b3.setBounds(30,300,80,30);
+        frame.add(b1);
+        frame.add(b2);
+        frame.add(b3);
+        //frame.pack();
+        frame.setLayout(null);//no layout manager  
+        frame.setVisible(true);//now frame will be visible, by default not visible  
         frame.show();
-        frame.add(new Button("Create user"));
-        frame.add(new Button("Log in"));
-        frame.add(new Button("Exit"));
+        //frame.add(new Button("Create user"));
+        //frame.add(new Button("Log in"));
+        //frame.add(new Button("Exit"));
+        */
          boolean keepon = true;
          while(keepon) {
             // These are sample SQL statements
@@ -531,5 +546,4 @@ public class ProfNetwork extends Panel{
        }
    
    }
-
 }//end ProfNetwork
