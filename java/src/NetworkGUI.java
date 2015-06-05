@@ -1,5 +1,6 @@
 //import ProfNetwork;
 import java.awt.EventQueue;
+import java.awt.BorderLayout;
 import javax.swing.*;
 import javax.imageio.ImageIO;
 import java.awt.Graphics;
@@ -46,18 +47,30 @@ public class NetworkGUI extends JFrame{
       }
     });
     
-    getContentPane().setLayout(new FlowLayout());
+    //getContentPane().setLayout(new FlowLayout());
     ImageIcon icon = new ImageIcon("../images/networklogothing.png");
-    JLabel label = new JLabel("", icon, JLabel.LEADING);
-    add(label);
-    add(b1);
-    add(b2);
-    add(b3);
-    add(userLabel);
-    add(userField);
-    add(passLabel);
-    add(passField); 
-    //pack();
+    JLabel label = new JLabel("", icon, JLabel.LEFT);
+    JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    panel.add(label);
+    getContentPane().add(panel, BorderLayout.NORTH);
+    //getContentPane().add(panel, BorderLayout.LINE_START);
+    //add(label);
+    
+    panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    panel.add(userLabel);
+    panel.add(userField);
+    panel.add(passLabel);
+    panel.add(passField);
+    getContentPane().add(panel, BorderLayout.CENTER); 
+    
+    
+    panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    panel.add(b1);
+    panel.add(b2);
+    panel.add(b3);
+    getContentPane().add(panel, BorderLayout.SOUTH);
+    
+    pack();
     setVisible(true);
   }
   
