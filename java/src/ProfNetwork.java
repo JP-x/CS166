@@ -10,7 +10,10 @@
  *
  */
 
-
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.Statement;
@@ -270,24 +273,24 @@ public class ProfNetwork {
               while(usermenu) {
                 System.out.println("MAIN MENU");
                 System.out.println("---------");
-                System.out.println("1. Go to Friends List");
-                System.out.println("2. Update Profile");
-                System.out.println("3. Send a Message");
-                System.out.println("4. Send Friend Request");
-                System.out.println("5. Search Profiles");
-                System.out.println("6. View Messages");
+                System.out.println("1. Go to Friends List"); //done
+                System.out.println("2. Update Profile"); //done
+                System.out.println("3. Send a Message"); //done
+                System.out.println("4. Send Friend Request"); //?
+                System.out.println("5. Search Profiles"); //done
+                System.out.println("6. View Messages"); //done
                 System.out.println(".........................");
-                System.out.println("8. Change Password");
+                System.out.println("8. Change Password"); //done
                 System.out.println("9. Log out");
                 if(retstate == 9){System.out.println("Password changed!");}
                 if(retstate == 10){System.out.println("Password change failed.");}
                 switch (readChoice()){
                    case 1: FriendList(esql, authorisedUser); break;
-                   case 2: UpdateProfile(esql); break;
-                   case 3: NewMessage(esql); break;
-                   case 4: SendRequest(esql); break;
+                   case 2: UpdateProfile(esql, authorisedUser); break;
+                   case 3: NewMessage(esql, authorisedUser); break;
+                   case 4: SendRequest(esql, authorisedUser); break;
                    case 5: SearchProfiles(esql, authorisedUser); break;
-                   //case 6: ViewMessage(esql, authorisedUser); break;
+                   case 6: ViewMessage(esql, authorisedUser); break;
                    case 8: 
                         retstate = ChangePassword(authorisedUser, esql); 
                     break;
@@ -378,7 +381,6 @@ public class ProfNetwork {
     * Check log in credentials for an existing user
     * @return User login or null is the user does not exist
     **/
-//Make sure on;y unique ids allowed
    public static String LogIn(ProfNetwork esql){
       try{
 		 System.out.print("\tEnter user login: ");
@@ -473,8 +475,8 @@ public class ProfNetwork {
 			boolean stay = true;
 			while(stay){
 				switch(readChoice()){
-					case 1: break;
-					case 2: break;
+					case 1: AddFriend(esql, currentUser, profileData.get(0));break;
+					case 2: RemoveFriend(esql, currentUser, profileData.get(0));break;
 					case 3: SendMessage(esql, currentUser, profileData.get(0)); break;
 					case 9: stay = false; break;
 				}
@@ -484,17 +486,94 @@ public class ProfNetwork {
 			System.err.println(e.getMessage());
 		}
 	}
-   
-   
-   public static void FriendList(ProfNetwork esql){
+  
+   public static void ViewMessage(ProfNetwork esql, String currentUser){
+    placeHeader("View Messages");
+    System.out.println("\t1. View Sent Messages.");
+    System.out.println("\t2. View Received Messages.");
+    placeFooter("Go Back", 9);
+    boolean stay = true;
+    while(stay){
+      switch(readChoice()){
+        case 1: ViewSent(esql, currentUser); break;
+        case 2: ViewReceived(esql, currentUser); break;
+        case 9: stay = false; break;
+      }
+      System.out.println("\t1. View Sent Messages.");
+      System.out.println("\t2. View Received Messages.");
+      placeFooter("Go Back", 9);
+    }
    }
-   public static void UpdateProfile(ProfNetwork esql){
+   public static void ViewSent(ProfNetwork esql, String currentUser){
+    try{
+			String query = String.format("SELECT receiverId, senderId, sendTime, contents  FROM MESSAGE WHERE senderId = '%s' AND (deleteStatus = '0' OR deleteStatus = '2')", currentUser);
+			List<List<String>> results = new ArrayList<List<String>>();
+      results = esql.executeQueryAndReturnResult(query);
+      placeHeader("Sent Messages");
+			if(results.size() <= 0){
+				System.out.println("You have no sent messages.");
+			}
+      else{
+        for(int i = 0; i < results.size(); ++i){
+          System.out.println("To: "+results.get(i).get(0));
+          System.out.println("From: "+results.get(i).get(1));
+          System.out.println(results.get(i).get(2));
+          System.out.println(results.get(i).get(3)); 
+        }
+      }
+		} catch (Exception e){
+			System.err.println(e.getMessage());
+		}
    }
-   public static void NewMessage(ProfNetwork esql){
+   public static void ViewReceived(ProfNetwork esql, String currentUser){
+    try{
+			String query = String.format("SELECT receiverId, senderId, sendTime, contents  FROM MESSAGE WHERE receiverId = '%s' AND (deleteStatus = '0' OR deleteStatus = '2')", currentUser);
+			List<List<String>> results = new ArrayList<List<String>>();
+      results = esql.executeQueryAndReturnResult(query);
+      placeHeader("Received Messages");
+			if(results.size() <= 0){
+				System.out.println("You have no received messages.");
+			}
+      else{
+        for(int i = 0; i < results.size(); ++i){
+          System.out.println("To: "+results.get(i).get(0));
+          System.out.println("From: "+results.get(i).get(1));
+          System.out.println(results.get(i).get(2));
+          System.out.println(results.get(i).get(3)); 
+        }
+      }
+		} catch (Exception e){
+			System.err.println(e.getMessage());
+		}
+   }
+   public static void AddFriend(ProfNetwork esql, String sender, String receiver){
+   }
+   public static void RemoveFriend(ProfNetwork esql, String sender, String receiver){
+   }
+   public static void UpdateProfile(ProfNetwork esql, String currentUser){
+     
+   }
+   public static void NewMessage(ProfNetwork esql, String currentUser){
+     try{
+       placeHeader("Send a Message");
+       System.out.println("\tWho do you wish to message? ");
+       String receiver = in.readLine();
+       System.out.println("\tEnter your message: ");
+       String msg = in.readLine();
+       java.util.Date date = new java.util.Date();
+       Timestamp curr = new Timestamp(date.getTime());
+       String msgid = msg + currentUser + receiver;
+       int msgHash = msgid.hashCode();
+       String query =  String.format("INSERT INTO MESSAGE (msgId, senderId, receiverId, contents, sendTime, deleteStatus, status) " + "VALUES("+ msgHash+", '" + currentUser+"', '"+receiver+"', '"+msg+"', '" + curr+ "', 0, 'sent')");
+       System.out.println(query);
+       esql.executeUpdate(query);
+     }catch(Exception e){
+      System.err.println(e.getMessage());
+     }
    }
    public static void SendMessage(ProfNetwork esql, String sender, String receiver){
    }
-   public static void SendRequest(ProfNetwork esql){
+   public static void SendRequest(ProfNetwork esql, String currentUser){
    }
 
 
