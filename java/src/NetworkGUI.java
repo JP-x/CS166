@@ -78,7 +78,7 @@ public class NetworkGUI extends JFrame{
   }
   
   private void loginAction(java.awt.event.ActionEvent evt, String user, String pass){
-  
+    esql.LogIn(esql, user, pass);
   }
   
   private void exitAction(java.awt.event.ActionEvent evt){
