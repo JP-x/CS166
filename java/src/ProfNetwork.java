@@ -399,14 +399,17 @@ public class ProfNetwork {
          return null;
       }
    }//end
-   public static int LogIn(ProfNetwork esql, login, password){
+   public static String LogIn(ProfNetwork esql, String login, String password){
      try{
        String query = String.format("SELECT * FROM USR WHERE userId = '%s' AND password = '%s'", login, password);
        int userNum = esql.executeQuery(query);
-       return userNum;
+       if(userNum > 0){
+        return "login";
+       }
+      return "";
      }catch(Exception e){
         System.err.println(e.getMessage());
-        return -1;
+        return "";
      }
    }
 
