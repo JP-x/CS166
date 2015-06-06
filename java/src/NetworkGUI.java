@@ -10,6 +10,13 @@ import java.awt.image.BufferedImage;
 import java.awt.Image;
 import java.awt.FlowLayout;
 import java.io.File;
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+
 import java.io.IOException;
 
 public class NetworkGUI extends JFrame{
@@ -19,9 +26,13 @@ public class NetworkGUI extends JFrame{
     
     NetworkGUI(String[] args){
       try{
-        esql = new ProfNetwork(args[0], args[1], args[2], args[3]);
+        // use postgres JDBC driver.
+         Class.forName ("org.postgresql.Driver").newInstance ();
+         // instantiate the ProfNetwork object and creates a physical
+        esql = new ProfNetwork(args[0], args[1], args[2], "");
+        System.out.println("Argument " + args[0]);
       } catch(Exception e){
-      
+        System.err.println("Error: "+ e.getMessage());
       }
       setTitle(title);
       setSize(640,480);
@@ -78,13 +89,17 @@ public class NetworkGUI extends JFrame{
   }
   
   private void loginAction(java.awt.event.ActionEvent evt, String user, String pass){
-    int status  = LogIn(esql, user, pass);
-    if(status >= 0){
+    String status = ProfNetwork.LogIn(esql, user, pass);
+    System.out.println("Username: " + user);
+    System.out.println("Password: " + pass);
+    if(status.equals("login")){
       //Login Passed
+      System.out.println("Go to User Profile.");
       
     }
     else{
       //Login Failed
+      System.out.println("Login Failed");
     }
   }
   
