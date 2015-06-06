@@ -1,6 +1,6 @@
 package CS166;
 
-import CS166.ProfNetwork;
+import CS166.*;
 import java.awt.EventQueue;
 import java.awt.BorderLayout;
 import javax.swing.*;
@@ -78,7 +78,14 @@ public class NetworkGUI extends JFrame{
   }
   
   private void loginAction(java.awt.event.ActionEvent evt, String user, String pass){
-    esql.LogIn(esql, user, pass);
+    int status  = LogIn(esql, user, pass);
+    if(status >= 0){
+      //Login Passed
+      
+    }
+    else{
+      //Login Failed
+    }
   }
   
   private void exitAction(java.awt.event.ActionEvent evt){
