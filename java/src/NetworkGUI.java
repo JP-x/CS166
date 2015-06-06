@@ -95,7 +95,6 @@ public class NetworkGUI extends JFrame{
     if(status.equals("login")){
       //Login Passed
       System.out.println("Go to User Profile.");
-      
     }
     else{
       //Login Failed
