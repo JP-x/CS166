@@ -448,6 +448,18 @@ public class ProfNetwork {
       }
       return;
    }//end
+   
+   public static List<List<String>> SearchProfiles(ProfNetwork esql, String search){
+      try{
+        List<List<String>> results = new ArrayList<List<String>>();
+        String query = String.format("SELECT * FROM USR WHERE userId = '%s'", search);
+        results = esql.executeQueryAndReturnResult(query);
+        return results; 
+      }catch(Exception e){
+        System.err.println(e.getMessage());
+        return null;
+      }
+    }
 
    public static void DisplayResults(ProfNetwork esql, List<List<String>> results){
       for(int i = 0; i < results.size(); ++i){
@@ -540,9 +552,20 @@ public class ProfNetwork {
 			System.err.println(e.getMessage());
 		}
    }
+   public static List<List<String>> ViewSent(ProfNetwork esql, Strint currentUser){
+    try{
+      String query = String.format("SELECT receiverId, senderId, sendTime, contents  FROM MESSAGE WHERE senderId = '%s' AND (deleteStatus = '0' OR deleteStatus = '2')", currentUser);
+			List<List<String>> results = new ArrayList<List<String>>();
+      results = esql.executeQueryAndReturnResult(query);
+      return results;
+    }catch(Exception e){
+      System.err.println(e.getMessage());
+      return null;
+    }
+   }
    public static void ViewReceived(ProfNetwork esql, String currentUser){
     try{
-			String query = String.format("SELECT receiverId, senderId, sendTime, contents  FROM MESSAGE WHERE receiverId = '%s' AND (deleteStatus = '0' OR deleteStatus = '2')", currentUser);
+			String query = String.format("SELECT receiverId, senderId, sendTime, contents  FROM MESSAGE WHERE receiverId = '%s' AND (deleteStatus = '0' OR deleteStatus = '1')", currentUser);
 			List<List<String>> results = new ArrayList<List<String>>();
       results = esql.executeQueryAndReturnResult(query);
       placeHeader("Received Messages");
@@ -560,6 +583,17 @@ public class ProfNetwork {
 		} catch (Exception e){
 			System.err.println(e.getMessage());
 		}
+   }
+   public static List<List<String>> ViewReceived(ProfNetwork esql, Strint currentUser){
+    try{
+      String query = String.format("SELECT receiverId, senderId, sendTime, contents  FROM MESSAGE WHERE receiverId = '%s' AND (deleteStatus = '0' OR deleteStatus = '1')", currentUser);
+			List<List<String>> results = new ArrayList<List<String>>();
+      results = esql.executeQueryAndReturnResult(query);
+      return results;
+    }catch(Exception e){
+      System.err.println(e.getMessage());
+      return null;
+    }
    }
    public static void AddFriend(ProfNetwork esql, String sender, String receiver){
    }
