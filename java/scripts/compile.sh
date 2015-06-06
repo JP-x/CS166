@@ -6,9 +6,9 @@ export PATH=$JAVA_HOME/bin:$PATH
 
 # compile the java program
 javac -d $DIR/../classes $DIR/../src/ProfNetwork.java
-javac -d $DIR/../classes $DIR/../src/NetworkGUI.java
+javac -d $DIR/../classes $DIR/../src/NetworkGUI.java $DIR/../src/ProfNetwork.java
 
 #run the java program
 #Use your database name, port number and login
-java -cp $DIR/../classes:$DIR/../lib/pg73jdbc3.jar NetworkGUI $DB_NAME $PGPORT $USER
+java -cp $DIR/../classes:$DIR/../lib/pg73jdbc3.jar CS166.NetworkGUI $DB_NAME $PGPORT $USER
 
