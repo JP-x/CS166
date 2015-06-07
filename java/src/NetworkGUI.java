@@ -96,7 +96,10 @@ public class NetworkGUI extends JFrame{
       
       b1.addActionListener(new java.awt.event.ActionListener(){
         public void actionPerformed(java.awt.event.ActionEvent evt){
-          viewCreateUser();
+          //value passed in determines what label is shown
+          getContentPane().removeAll();
+          getContentPane().repaint();
+          viewCreateUser(0);
         }
       });
       
@@ -249,38 +252,145 @@ public class NetworkGUI extends JFrame{
       setVisible(true);
   }
   
-  private void viewCreateUser(){
+  
+  //value passed in determines what label is shown
+  // 0  - Create New account
+  // 1  - Account created
+  // 2  - User already exists
+  private void viewCreateUser(int user_created_state){
+      JLabel userLabel = new JLabel("New Username: \n");
+      JLabel passLabel = new JLabel("New Password: \n");
+      JLabel emailLabel = new JLabel("email: \n");
+      JLabel nameLabel = new JLabel("name: \n");
+      JLabel bdayLabel = new JLabel("bday: \n");
+      
+      final JTextField userField = new JTextField(20);
+      final JTextField passField = new JTextField(20);
+      final JTextField emailField = new JTextField(20);
+      final JTextField nameField = new JTextField(20);
+      final JTextField bdayField = new JTextField(20);
+      
+      //x,y,width,height
+      userLabel.setBounds(100,400,100,30);
+      passLabel.setBounds(100,500, 100, 30);
+      emailLabel.setBounds(100,600,100,30);
+      nameLabel.setBounds(100,700, 100, 30);
+      bdayLabel.setBounds(100,800, 100, 30);
+      
+      userField.setBounds(100, 400, 200, 30);
+      passField.setBounds(100, 500, 200, 30);
+      emailField.setBounds(100, 600, 200, 30);
+      nameField.setBounds(100, 700, 200, 30);
+      bdayField.setBounds(100, 800, 200, 30);
+      
+      
+      JButton b2 = new JButton("Create User");
+      JButton b3 = new JButton("Cancel");
+
+      b2.setLocation(400,200);
+      b2.setSize(200,30);
+
+      b3.setLocation(400,300);
+      b3.setSize(200,30);
+      //
+      b2.addActionListener(new java.awt.event.ActionListener(){
+        public void actionPerformed(java.awt.event.ActionEvent evt){
+          /*
+          boolean success = false;
+          success = loginAction(evt, userField.getText(), passField.getText());
+          
+          if(loginAction(evt, userField.getText(), passField.getText())){
+            getContentPane().removeAll();
+            getContentPane().repaint();
+            viewProfile(userField.getText());
+          }
+          */
+        }
+      });
+      
+      //hit cancel go back to start menu 
+      b3.addActionListener(new java.awt.event.ActionListener(){
+        public void actionPerformed(java.awt.event.ActionEvent evt){
+          getContentPane().removeAll();
+          getContentPane().repaint();          
+          viewStart();
+        }
+      });
+  
+      ImageIcon icon = new ImageIcon("../images/networklogothing.png");
+      JLabel label = new JLabel("", icon, JLabel.LEFT);
+      if(user_created_state == 0) //initial run through
+      {
+        label = new JLabel("Create New Account", icon, JLabel.LEFT);
+      }
+      else if ( user_created_state == 1) // successful addition
+      {
+          label = new JLabel("Account Created", icon, JLabel.LEFT);
+      }
+      else if (user_created_state == 2) //  user already exists
+      {
+          label = new JLabel("User exists", icon, JLabel.LEFT);
+      }
+ 
+      JPanel logo_panel = new JPanel();
+      logo_panel.add(label);
+      getContentPane().add(logo_panel, BorderLayout.NORTH);
+      
+      JPanel loginpanel = new JPanel();
+      loginpanel.add(userLabel);
+      loginpanel.add(userField);
+      loginpanel.add(passLabel);
+      loginpanel.add(passField);
+      loginpanel.add(emailLabel);
+      loginpanel.add(emailField);
+      //set to west
+      getContentPane().add(loginpanel, BorderLayout.CENTER); 
+      
+      JPanel loginpanel2 = new JPanel();
+      loginpanel2.add(nameLabel);
+      loginpanel2.add(nameField);
+      loginpanel2.add(bdayLabel);
+      loginpanel2.add(bdayField);
+      loginpanel2.add(b2);
+      loginpanel2.add(b3);
+      getContentPane().add(loginpanel2, BorderLayout.PAGE_END); 
+      
+      pack();
+      setVisible(true);
+  
+  
+  
   
   }
   
   private void viewFriends(String user){
     viewMenu(user);
     
-    pack();
+   // pack();
     setVisible(true);
   }
   
   private void viewProfile(String user){
     viewMenu(user);
-    pack();
+   // pack();
     setVisible(true);
   }
   
   private void viewMsgSend(String user){
     viewMenu(user);
-    pack();
+    //pack();
     setVisible(true);
   }
   
   private void viewMsgView(String user){
     viewMenu(user);
-    pack();
+   // pack();
     setVisible(true);
   }
   
   private void viewSearch(String user){
     viewMenu(user);
-    pack();
+   // pack();
     setVisible(true);
   }
   
