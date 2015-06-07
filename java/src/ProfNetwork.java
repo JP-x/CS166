@@ -449,7 +449,7 @@ public class ProfNetwork {
       return;
    }//end
    
-   public static List<List<String>> SearchProfiles(ProfNetwork esql, String search){
+   public static List<List<String>> GetProfiles(ProfNetwork esql, String search){
       try{
         List<List<String>> results = new ArrayList<List<String>>();
         String query = String.format("SELECT * FROM USR WHERE userId = '%s'", search);
@@ -552,7 +552,7 @@ public class ProfNetwork {
 			System.err.println(e.getMessage());
 		}
    }
-   public static List<List<String>> ViewSent(ProfNetwork esql, Strint currentUser){
+   public static List<List<String>> GetSent(ProfNetwork esql, String currentUser){
     try{
       String query = String.format("SELECT receiverId, senderId, sendTime, contents  FROM MESSAGE WHERE senderId = '%s' AND (deleteStatus = '0' OR deleteStatus = '2')", currentUser);
 			List<List<String>> results = new ArrayList<List<String>>();
@@ -584,7 +584,7 @@ public class ProfNetwork {
 			System.err.println(e.getMessage());
 		}
    }
-   public static List<List<String>> ViewReceived(ProfNetwork esql, Strint currentUser){
+   public static List<List<String>> GetReceived(ProfNetwork esql, String currentUser){
     try{
       String query = String.format("SELECT receiverId, senderId, sendTime, contents  FROM MESSAGE WHERE receiverId = '%s' AND (deleteStatus = '0' OR deleteStatus = '1')", currentUser);
 			List<List<String>> results = new ArrayList<List<String>>();
