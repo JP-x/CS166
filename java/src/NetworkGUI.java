@@ -370,7 +370,6 @@ public class NetworkGUI extends JFrame{
   
   }
   
-  //TRISH HAS
   private void viewFriends(String user){
     //viewMenu(user);
     System.out.println("Go to Friends List");
