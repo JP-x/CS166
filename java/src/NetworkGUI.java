@@ -4,6 +4,7 @@ import CS166.*;
 import java.awt.EventQueue;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
 import javax.swing.*;
 import javax.imageio.ImageIO;
 import java.awt.Graphics;
@@ -139,25 +140,25 @@ public class NetworkGUI extends JFrame{
       JButton passwd = new JButton("Change Password");
       JButton logout = new JButton("Logout");
 
-      friends.setLocation(100,100);
+      friends.setLocation(400,100);
       friends.setSize(200,30);
 
-      profile.setLocation(100,200);
+      profile.setLocation(600,100);
       profile.setSize(200,30);
       
-      sendMsg.setLocation(100,300);
+      sendMsg.setLocation(400,300);
       sendMsg.setSize(200,30);
       
-      viewMsg.setLocation(100,400);
+      viewMsg.setLocation(600,400);
       viewMsg.setSize(200,30);
       
-      search.setLocation(100,500);
+      search.setLocation(400,500);
       search.setSize(200,30);
       
-      passwd.setLocation(100,600);
+      passwd.setLocation(600,600);
       passwd.setSize(200,30);
       
-      logout.setLocation(100,700);
+      logout.setLocation(400,700);
       logout.setSize(200,30);
       
       friends.addActionListener(new java.awt.event.ActionListener(){
@@ -216,7 +217,14 @@ public class NetworkGUI extends JFrame{
         }
       });
       
-      JPanel buttons_panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+      String welcome_mes = "Welcome to The Network " + user + "!\n";
+      ImageIcon user_icon = new ImageIcon("../images/usericon.png");
+      JLabel label = new JLabel(welcome_mes, user_icon, JLabel.LEFT);
+      JPanel user_panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+      user_panel.add(label);
+      getContentPane().add(user_panel, BorderLayout.NORTH);
+      
+      JPanel buttons_panel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
       buttons_panel.add(friends);
       buttons_panel.add(profile);
       buttons_panel.add(sendMsg);
@@ -224,7 +232,7 @@ public class NetworkGUI extends JFrame{
       buttons_panel.add(search);
       buttons_panel.add(passwd);
       buttons_panel.add(logout);
-      getContentPane().add(buttons_panel, BorderLayout.SOUTH);
+      getContentPane().add(buttons_panel, BorderLayout.CENTER);
       
       //pack();
       //setVisible(true);
