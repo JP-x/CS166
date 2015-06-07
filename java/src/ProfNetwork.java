@@ -421,7 +421,7 @@ public class ProfNetwork {
     }catch(Exception e){
       System.err.println(e.getMessage());
     }
-   }//end
+   }//end 
 
    public static void SearchProfiles(ProfNetwork esql, String currentUser){
       try{
