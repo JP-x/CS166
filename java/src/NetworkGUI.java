@@ -5,7 +5,9 @@ import java.awt.EventQueue;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import javax.swing.*;
+import javax.swing.JComponent;
 import javax.imageio.ImageIO;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -197,7 +199,7 @@ public class NetworkGUI extends JFrame{
         public void actionPerformed(java.awt.event.ActionEvent evt){
           getContentPane().removeAll();
           getContentPane().repaint();
-          viewMsgSend(user);
+          viewMsgSend(user,-1);
         }
       });
       
@@ -213,7 +215,7 @@ public class NetworkGUI extends JFrame{
         public void actionPerformed(java.awt.event.ActionEvent evt){
           getContentPane().removeAll();
           getContentPane().repaint();
-          viewSearch(user);
+          viewSearch(user,0);
         }
       });
       
@@ -297,16 +299,19 @@ public class NetworkGUI extends JFrame{
       //
       b2.addActionListener(new java.awt.event.ActionListener(){
         public void actionPerformed(java.awt.event.ActionEvent evt){
-          /*
-          boolean success = false;
-          success = loginAction(evt, userField.getText(), passField.getText());
-          
-          if(loginAction(evt, userField.getText(), passField.getText())){
-            getContentPane().removeAll();
-            getContentPane().repaint();
-            viewProfile(userField.getText());
-          }
-          */
+          //TODO: try adding user
+          // false if exists
+          // true if successful add
+          //getContentPane().removeAll();
+          //getContentPane().repaint();  
+            
+            
+            //call viewCreateUser(int num)
+            //value passed in determines what label is shown
+            // 0  - Create New account
+            // 1  - Account created
+            // 2  - User already exists
+            
         }
       });
       
@@ -365,6 +370,7 @@ public class NetworkGUI extends JFrame{
   
   }
   
+  //TRISH HAS
   private void viewFriends(String user){
     //viewMenu(user);
     System.out.println("Go to Friends List");
@@ -393,28 +399,164 @@ public class NetworkGUI extends JFrame{
     setVisible(true);
   }
   
+  //TRISH HAS
   private void viewProfile(String user){
     viewMenu(user);
    // pack();
     setVisible(true);
   }
   
-  private void viewMsgSend(String user){
-    viewMenu(user);
-    //pack();
-    setVisible(true);
+  
+  private void viewMsgSend(final String user, int msg_state){
+      JLabel userLabel = new JLabel("To Username:");
+      final JTextField userField = new JTextField(20);
+      
+      ////////////////////////////////////////////////
+      ///////IF WANT MULTI LINE. USE TEXTAREA///////////
+      //////////////////////////////////////////////
+      final JTextField messField = new JTextField(100);
+      userLabel.setBounds(400,400,100,30);
+      userField.setBounds(400, 400, 100, 30);
+      messField.setBounds(400, 400, 100, 100);
+      messField.setPreferredSize(new Dimension(100,100));
+      
+      JButton b2 = new JButton("Send Message");
+      JButton b3 = new JButton("Cancel");
+      
+      b2.setLocation(400,200);
+      b2.setSize(200,30);
+
+      b3.setLocation(400,300);
+      b3.setSize(200,30);
+      
+      //send button
+      b2.addActionListener(new java.awt.event.ActionListener(){
+        public void actionPerformed(java.awt.event.ActionEvent evt){
+          //TODO: ADD FUNCTION TO SEND MESSAGE TO SPECIFIED USER
+          //CHECK IF USER EXISTS
+          getContentPane().removeAll();
+          getContentPane().repaint();
+          viewMsgSend(user,1);
+        }
+      });
+      //cancel search button
+      b3.addActionListener(new java.awt.event.ActionListener(){
+        public void actionPerformed(java.awt.event.ActionEvent evt){
+          getContentPane().removeAll();
+          getContentPane().repaint();
+          viewMenu(user);
+        }
+      });
+  
+      
+      ImageIcon icon = new ImageIcon("../images/networklogothing.png");
+      JLabel label = new JLabel("Send Message", icon, JLabel.LEFT);
+      JPanel logo_panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+      logo_panel.add(label);
+      getContentPane().add(logo_panel, BorderLayout.NORTH);
+      
+      JPanel searchpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+      searchpanel.add(userLabel);
+      searchpanel.add(userField);
+      searchpanel.add(b2);
+      searchpanel.add(b3);
+      getContentPane().add(searchpanel, BorderLayout.CENTER); 
+      
+      JPanel message_panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+      //user results here
+      if(msg_state == 0)
+      {
+        JLabel resultsLabel = new JLabel("Cannot find user");
+        message_panel.add(resultsLabel);
+      }
+      else if(msg_state ==1)
+      {
+        JLabel resultsLabel = new JLabel("Message Sent.");
+        //display that users information
+        message_panel.add(resultsLabel);
+      }
+      message_panel.add(messField);
+      getContentPane().add(message_panel, BorderLayout.SOUTH);
+      pack();
+      setVisible(true);
   }
   
-  private void viewMsgView(String user){
+  private void viewMsgView(final String user){
     viewMenu(user);
    // pack();
     setVisible(true);
   }
   
-  private void viewSearch(String user){
-    viewMenu(user);
-   // pack();
-    setVisible(true);
+  private void viewSearch(final String user, int search_state){
+
+      JLabel userLabel = new JLabel("User Search");
+      final JTextField userField = new JTextField(20);
+      userLabel.setBounds(400,400,100,30);
+      userField.setBounds(400, 400, 100, 30);
+      
+      JButton b2 = new JButton("Search");
+      JButton b3 = new JButton("Cancel");
+      
+      b2.setLocation(400,200);
+      b2.setSize(200,30);
+
+      b3.setLocation(400,300);
+      b3.setSize(200,30);
+      
+      //search button
+      b2.addActionListener(new java.awt.event.ActionListener(){
+        public void actionPerformed(java.awt.event.ActionEvent evt){
+          /*
+          boolean success = false;
+          success = loginAction(evt, userField.getText(), passField.getText());
+          if(loginAction(evt, userField.getText(), passField.getText())){
+            getContentPane().removeAll();
+            getContentPane().repaint();
+            viewProfile(userField.getText());
+          }
+          * */
+        }
+      });
+      //cancel search button
+      b3.addActionListener(new java.awt.event.ActionListener(){
+        public void actionPerformed(java.awt.event.ActionEvent evt){
+          getContentPane().removeAll();
+          getContentPane().repaint();
+          viewMenu(user);
+        }
+      });
+  
+      
+      ImageIcon icon = new ImageIcon("../images/networklogothing.png");
+      JLabel label = new JLabel("User Search", icon, JLabel.LEFT);
+      JPanel logo_panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+      logo_panel.add(label);
+      getContentPane().add(logo_panel, BorderLayout.NORTH);
+      
+      JPanel searchpanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+      searchpanel.add(userLabel);
+      searchpanel.add(userField);
+      searchpanel.add(b2);
+      searchpanel.add(b3);
+      getContentPane().add(searchpanel, BorderLayout.CENTER); 
+      
+      JPanel results_panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+      //user results here
+      if(search_state == 0)
+      {
+        JLabel resultsLabel = new JLabel("No user found.");
+        results_panel.add(resultsLabel);
+      }
+      else if(search_state ==1)
+      {
+        JLabel resultsLabel = new JLabel("User found.");
+        //display that users information
+        results_panel.add(resultsLabel);
+      } 
+      getContentPane().add(results_panel, BorderLayout.SOUTH);
+      
+      pack();
+      setVisible(true);
   }
   
   private void viewPasswd(final String user,int changed_pwd_success){
