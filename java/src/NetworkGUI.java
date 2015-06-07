@@ -55,6 +55,17 @@ public class NetworkGUI extends JFrame{
     }
   }
   
+  private boolean passAction(java.awt.event.ActionEvent evt, String user, String pass, String newPass){
+    String status = ProfNetwork.ChangePassword(user, esql, pass, newPass);
+    if(status.equals("changed")){
+        //Password changed
+        return true;
+    }
+    else{
+        return false;
+    }
+  }
+  
   private void exitAction(java.awt.event.ActionEvent evt){
     System.exit(0);
   }
@@ -205,7 +216,7 @@ public class NetworkGUI extends JFrame{
         public void actionPerformed(java.awt.event.ActionEvent evt){
           getContentPane().removeAll();
           getContentPane().repaint();
-          viewPasswd(user);
+          viewPasswd(user,0);
         }
       });
       
@@ -234,8 +245,8 @@ public class NetworkGUI extends JFrame{
       buttons_panel.add(logout);
       getContentPane().add(buttons_panel, BorderLayout.CENTER);
       
-      //pack();
-      //setVisible(true);
+      pack();
+      setVisible(true);
   }
   
   private void viewCreateUser(){
@@ -273,10 +284,87 @@ public class NetworkGUI extends JFrame{
     setVisible(true);
   }
   
-  private void viewPasswd(String user){
-    viewMenu(user);
-    pack();
-    setVisible(true);
+  private void viewPasswd(final String user,int changed_pwd_success){
+    //viewMenu(user);
+    
+      JLabel oldpassLabel = new JLabel("Enter Old Password: ");
+      JLabel newpassLabel = new JLabel("Enter New Password: ");
+      final JTextField oldpassField = new JTextField(20);
+      final JTextField newpassField = new JTextField(20);
+      oldpassLabel.setBounds(400,400,100,30);
+      newpassLabel.setBounds(400,500, 100, 30);
+      oldpassField.setBounds(400, 400, 100, 30);
+      newpassField.setBounds(600, 600, 200, 30);
+      
+      JButton b1 = new JButton("Cancel");
+      JButton b2 = new JButton("Change Password");
+
+      b1.setLocation(400,100);
+      b1.setSize(200,30);
+
+      b2.setLocation(400,200);
+      b2.setSize(200,30);
+      
+      //cancel button b1
+      b1.addActionListener(new java.awt.event.ActionListener(){
+        public void actionPerformed(java.awt.event.ActionEvent evt){
+            //go back to menu
+            getContentPane().removeAll();
+            getContentPane().repaint();
+            viewMenu(user);
+        }
+      });
+      
+      //change password button b2
+      b2.addActionListener(new java.awt.event.ActionListener(){
+        public void actionPerformed(java.awt.event.ActionEvent evt){
+          boolean success = false;
+          //test password
+          success = passAction(evt, user, oldpassField.getText(), newpassField.getText());
+          
+          if(success){
+            getContentPane().removeAll();
+            getContentPane().repaint();
+            //viewProfile(userField.getText());
+            viewPasswd(user,1);
+          }
+          else
+          {
+            viewPasswd(user,2);
+          }
+        }
+      });
+  
+      
+      ImageIcon icon = new ImageIcon("../images/usericon.png");
+      
+      JLabel label = new JLabel("", icon, JLabel.LEFT);
+      if(changed_pwd_success == 1)
+      {
+          label = new JLabel("Password changed", icon, JLabel.LEFT);
+      }
+      else if (changed_pwd_success == 2)
+      {
+          label = new JLabel("Invalid Password", icon, JLabel.LEFT);   
+      }
+      JPanel icon_panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+      icon_panel.add(label);
+      getContentPane().add(icon_panel, BorderLayout.NORTH);
+      
+      JPanel loginpanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+      loginpanel.add(oldpassLabel);
+      loginpanel.add(oldpassField);
+      loginpanel.add(newpassLabel);
+      loginpanel.add(newpassField);
+      getContentPane().add(loginpanel, BorderLayout.CENTER); 
+      
+      JPanel buttons_panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+      buttons_panel.add(b2);
+      buttons_panel.add(b1);
+      getContentPane().add(buttons_panel, BorderLayout.SOUTH);
+      
+      pack();
+      setVisible(true);
   }
     
     
