@@ -649,5 +649,25 @@ public class ProfNetwork {
        }
    
    }
+   
+   public static String ChangePassword(String current_user, ProfNetwork esql, String oldPass, String newPass){
+       try{
+
+           String query = String.format("SELECT * FROM USR WHERE userId = '%s' AND password = '%s'", current_user, oldPass);
+           int valid = esql.executeQuery(query);
+           if(valid > 0){
+               query = String.format("UPDATE USR SET password = '%s' WHERE userId = '%s' ", newPass, current_user);
+               System.out.println(valid); 
+                esql.executeUpdate(query);
+                return "changed";
+            }
+            return "";
+            
+       }catch(Exception e){
+            System.err.println(e.getMessage() );
+            return "";
+       }
+   
+   }
 
 }//end ProfNetwork
