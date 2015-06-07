@@ -422,6 +422,20 @@ public class ProfNetwork {
       System.err.println(e.getMessage());
     }
    }//end 
+   
+   public static List<List<String>> getFriends(ProfNetwork esql, String currentUser){
+    try{
+      List<List<String>> results = new ArrayList<List<String>>();
+      String query = String.format("SELECT connectionId FROM CONNECTION_USR where userId = '%s' AND status = 'Accept'",currentUser);
+      results = esql.executeQueryAndReturnResult(query);
+      query = String.format("SELECT userId FROM CONNECTION_USR where connectionId = '%s' AND status = 'Accept'", currentUser);
+      results.addAll(esql.executeQueryAndReturnResult(query));
+      return results;
+    }catch(Exception e){
+      System.err.println(e.getMessage());
+      return null;
+    }
+   }
 
    public static void SearchProfiles(ProfNetwork esql, String currentUser){
       try{

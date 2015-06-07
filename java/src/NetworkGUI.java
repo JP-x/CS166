@@ -18,6 +18,8 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.ArrayList;
 
 import java.io.IOException;
 
@@ -364,9 +366,30 @@ public class NetworkGUI extends JFrame{
   }
   
   private void viewFriends(String user){
-    viewMenu(user);
+    //viewMenu(user);
+    System.out.println("Go to Friends List");
+    List<List<String>>results = new ArrayList<List<String>>();
+    results = ProfNetwork.getFriends(esql, user);
+    if(results == null){return;}
+    JButton friends[];
+    friends = new JButton[results.size()];
     
-   // pack();
+    ImageIcon icon = new ImageIcon("../images/networklogothing.png");
+      JLabel label = new JLabel("", icon, JLabel.LEFT);
+      JPanel logo_panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+      logo_panel.add(label);
+      getContentPane().add(logo_panel, BorderLayout.NORTH);
+      
+    
+    JPanel friends_panel = new JPanel();
+    for(int i = 0; i < results.size(); ++i){
+      friends[i] = new JButton(results.get(i).get(0));
+      friends[i].setSize(200,30);
+      friends_panel.add(friends[i]);
+    }
+    getContentPane().add(friends_panel, BorderLayout.CENTER);
+    
+    pack();
     setVisible(true);
   }
   
