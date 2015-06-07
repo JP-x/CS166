@@ -1,0 +1,24 @@
+COPY USR
+FROM '/tmp/think001/CS166/data/Profiles.csv'
+WITH DELIMITER ','
+CSV HEADER;
+
+COPY CONNECTION_USR
+FROM '/tmp/think001/CS166/data/Connection.csv'
+WITH DELIMITER ','
+CSV HEADER;
+
+COPY MESSAGE
+FROM '/tmp/think001/CS166/data/Message.csv'
+WITH DELIMITER ';'
+CSV HEADER;
+
+COPY EDUCATIONAL_DETAILS
+FROM '/tmp/think001/CS166/data/Edu_Det.csv'
+WITH DELIMITER ','
+CSV HEADER;
+
+COPY WORK_EXPR
+FROM '/tmp/think001/CS166/data/Work_Ex.csv'
+WITH DELIMITER ','
+CSV HEADER;
