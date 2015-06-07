@@ -236,6 +236,7 @@ public class NetworkGUI extends JFrame{
   
   private void viewFriends(String user){
     viewMenu(user);
+    
     pack();
     setVisible(true);
   }
