@@ -1,2 +1,9 @@
 FATAL:  lock file "postmaster.pid" already exists
 HINT:  Is another postmaster (PID 22308) running in data directory "/tmp/think001/data"?
+FATAL:  lock file "postmaster.pid" already exists
+HINT:  Is another postmaster (PID 6748) running in data directory "/tmp/think001/data"?
+LOG:  logger shutting down
+LOG:  logger shutting down
+LOG:  logger shutting down
+LOG:  logger shutting down
+LOG:  logger shutting down

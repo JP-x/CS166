@@ -278,7 +278,7 @@ public class ProfNetwork {
                 System.out.println("1. Go to Friends List"); //done
                 System.out.println("2. Update Profile"); //done
                 System.out.println("3. Send a Message"); //done
-                System.out.println("4. Send Friend Request"); //?
+                System.out.println("4. Send Friend Request"); //done
                 System.out.println("5. Search Profiles"); //done
                 System.out.println("6. View Messages"); //done
                 System.out.println(".........................");
@@ -378,6 +378,17 @@ public class ProfNetwork {
          System.err.println (e.getMessage ());
       }
    }//end
+   
+   public static boolean createUser(ProfNetwork esql, String user, String pass, String email, String name, String dob){
+    try{
+      String query = String.format("INSERT INTO USR (userId, password, email, name, dateofbirth) VALUES ('%s', '%s', '%s', '%s', '%s')", user, pass, email, name, dob);
+      esql.executeUpdate(query);
+      return true;
+    }catch(Exception e){
+      System.err.println(e.getMessage());
+      return false;
+    }
+   }
 
    /*
     * Check log in credentials for an existing user
@@ -399,6 +410,30 @@ public class ProfNetwork {
          return null;
       }
    }//end
+   
+   public static List<List<String>> getRequests(ProfNetwork esql, String user){
+    try{
+      String query = String.format("SELECT * FROM CONNECTION_USR WHERE connectionId='%s' AND status='Request'",user);
+      return esql.executeQueryAndReturnResult(query);
+    }catch(Exception e){
+      System.err.println(e.getMessage());
+      return null;
+    }
+   }
+   
+   public static List<String> getUserInfo(ProfNetwork esql, String user){
+    try{
+      String query = String.format("SELECT * FROM USR WHERE userId = '%s'", user);
+      List<List<String>> results = esql.executeQueryAndReturnResult(query);
+      if(results.size() > 0){
+        return results.get(0);
+      }
+      return null;
+    }catch(Exception e){
+      System.err.println(e.getMessage());
+      return null;
+    }
+   }
    public static String LogIn(ProfNetwork esql, String login, String password){
      try{
        String query = String.format("SELECT * FROM USR WHERE userId = '%s' AND password = '%s'", login, password);
@@ -422,6 +457,39 @@ public class ProfNetwork {
       System.err.println(e.getMessage());
     }
    }//end 
+   
+   public static boolean addFriend(ProfNetwork esql, String currentUser, String request){
+	   try{
+		   String query = String.format("INSERT INTO CONNECTION_USR(userId, connectionId, status) VALUES('%s', '%s', 'Request')", currentUser, request);
+		   esql.executeUpdate(query);
+		   return true;
+	   }catch(Exception e){
+		   System.err.println(e.getMessage() );
+       return false;
+	   }
+   }
+   
+   public static boolean confirmFriend(ProfNetwork esql, String currentUser, String friend){
+    try{
+      String query = String.format("UPDATE CONNECTION_USR SET status = 'Accept' WHERE userid = '%s' AND connectionId = '%s'", friend, currentUser);
+      esql.executeUpdate(query);
+      return true;
+    }catch(Exception e){
+      System.err.println(e.getMessage());
+      return false;
+    }
+   }
+   
+   public static boolean rejectFriend(ProfNetwork esql, String currentUser, String friend){
+    try{
+      String query = String.format("UPDATE CONNECTION_USR SET status = 'Reject' WHERE userid = '%s' AND connectionId = '%s'", friend, currentUser);
+      esql.executeUpdate(query);
+      return true;
+    }catch(Exception e){
+      System.err.println(e.getMessage());
+      return false;
+    }
+   }
    
    public static List<List<String>> getFriends(ProfNetwork esql, String currentUser){
     try{
@@ -462,6 +530,16 @@ public class ProfNetwork {
       }
       return;
    }//end
+   public static List<List<String>> findProfile(ProfNetwork esql, String q){
+    try{
+        //List<List<String>> profileResults = new ArrayList<List<String>>();
+        String query = String.format("SELECT * FROM USR WHERE userId = '%s'", q);
+        return esql.executeQueryAndReturnResult(query);
+      }catch(Exception e){
+        System.err.println(e.getMessage());
+        return null;
+      }
+   }
    
    public static List<List<String>> GetProfiles(ProfNetwork esql, String search){
       try{
@@ -499,6 +577,24 @@ public class ProfNetwork {
 			}
 		}
 	}
+  
+  public static void deleteMsg(ProfNetwork esql, String msgId, String currentUser){
+    try{
+      String query = String.format("UPDATE message SET deleteStatus = '1' WHERE (senderId = '%s' AND msgId = '%s' AND deleteStatus = 0) ", currentUser, msgId);
+      esql.executeUpdate(query);
+          
+      query = String.format("UPDATE message SET deleteStatus = '2' WHERE (receiverId = '%s' AND msgId = '%s' AND deleteStatus = 0) ", currentUser, msgId);
+      esql.executeUpdate(query);
+          
+      query = String.format("UPDATE message SET deleteStatus = '3' WHERE (senderId = '%s' AND msgId = '%s' AND deleteStatus = 2) ", currentUser, msgId);
+      esql.executeUpdate(query);
+
+      query = String.format("UPDATE message SET deleteStatus = '3' WHERE (receiverId = '%s' AND msgId = '%s' AND deleteStatus = 1) ", currentUser, msgId);
+      esql.executeUpdate(query);
+    }catch(Exception e){
+      System.err.println(e.getMessage());
+    }
+  }
 	
 	public static void goToProfile(ProfNetwork esql, List<String> profileData, String currentUser){
 		try{
@@ -518,7 +614,7 @@ public class ProfNetwork {
 				switch(readChoice()){
 					case 1: AddFriend(esql, currentUser, profileData.get(0));break;
 					case 2: RemoveFriend(esql, currentUser, profileData.get(0));break;
-					case 3: SendMessage(esql, currentUser, profileData.get(0)); break;
+					//case 3: SendMessage(esql, currentUser, profileData.get(0)); break;
 					case 9: stay = false; break;
 				}
 			}
@@ -568,7 +664,7 @@ public class ProfNetwork {
    }
    public static List<List<String>> GetSent(ProfNetwork esql, String currentUser){
     try{
-      String query = String.format("SELECT receiverId, senderId, sendTime, contents  FROM MESSAGE WHERE senderId = '%s' AND (deleteStatus = '0' OR deleteStatus = '2')", currentUser);
+      String query = String.format("SELECT receiverId, senderId, sendTime, contents, msgId  FROM MESSAGE WHERE senderId = '%s' AND (deleteStatus = '0' OR deleteStatus = '2')", currentUser);
 			List<List<String>> results = new ArrayList<List<String>>();
       results = esql.executeQueryAndReturnResult(query);
       return results;
@@ -579,7 +675,7 @@ public class ProfNetwork {
    }
    public static void ViewReceived(ProfNetwork esql, String currentUser){
     try{
-			String query = String.format("SELECT receiverId, senderId, sendTime, contents  FROM MESSAGE WHERE receiverId = '%s' AND (deleteStatus = '0' OR deleteStatus = '1')", currentUser);
+			String query = String.format("SELECT receiverId, senderId, sendTime, contents, msgId  FROM MESSAGE WHERE receiverId = '%s' AND (deleteStatus = '0' OR deleteStatus = '1')", currentUser);
 			List<List<String>> results = new ArrayList<List<String>>();
       results = esql.executeQueryAndReturnResult(query);
       placeHeader("Received Messages");
@@ -634,7 +730,34 @@ public class ProfNetwork {
       System.err.println(e.getMessage());
      }
    }
-   public static void SendMessage(ProfNetwork esql, String sender, String receiver){
+   public static boolean sendMessage(ProfNetwork esql, String sender, String receiver, String msg){
+    try{
+      java.util.Date date = new java.util.Date();
+      Timestamp curr = new Timestamp(date.getTime());
+      String msgid = msg + sender + receiver;
+      int msgHash = msgid.hashCode();
+      String query = String.format("INSERT INTO MESSAGE (msgId, senderId, receiverId, contents, sendTime, deleteStatus, status) VALUES('%s', '%s', '%s', '%s', '%s', 0, 'sent')", msgHash, sender, receiver, msg, curr);
+      esql.executeUpdate(query);
+      return true;
+    }catch(Exception e){
+      System.err.println(e.getMessage());
+      return false;
+    }
+   }
+   
+   public static List<List<String>> getMessages(ProfNetwork esql, String user){
+    try{
+      List<List<String>> results = new ArrayList<List<String>>();
+      if(results !=null)
+        results = GetSent(esql, user);
+      List<List<String>> hold = GetReceived(esql,user);
+      if(hold != null)
+        results.addAll(hold);
+      return results;
+    }catch(Exception e){
+      System.err.println(e.getMessage());
+      return null;
+    }
    }
    public static void SendRequest(ProfNetwork esql, String currentUser){
    }

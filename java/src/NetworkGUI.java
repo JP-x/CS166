@@ -27,6 +27,7 @@ import java.io.IOException;
 
 public class NetworkGUI extends JFrame{
     String title = "The Network";
+    String currentUser = null;
     private BufferedImage image;
     ProfNetwork esql = null;
     
@@ -37,7 +38,7 @@ public class NetworkGUI extends JFrame{
          // instantiate the ProfNetwork object and creates a physical
         esql = new ProfNetwork(args[0], args[1], args[2], "");
         setTitle(title);
-        setSize(640,480);
+        setSize(640,768);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         viewStart();
       }catch(Exception e){
@@ -50,6 +51,7 @@ public class NetworkGUI extends JFrame{
     if(status.equals("login")){
       //Login Passed
       System.out.println("Go to User Profile.");
+      currentUser = user;
       return true;
     }
     else{
@@ -57,6 +59,45 @@ public class NetworkGUI extends JFrame{
       System.out.println("Login Failed");
       return false;
     }
+  }
+  
+  private boolean canAddFriend(String user, String check){
+     try{
+       List<List<String>> options = new ArrayList<List<String>>();
+		   List<List<String>> friends = ProfNetwork.getFriends(esql, user);
+		   //options.addAll(friends);
+       for(int i = 0; i < friends.size(); ++i){
+        if(friends.get(i).get(0).equals(check)){
+          return false;
+        }
+       }
+       if(friends.size() < 5){
+        return true;
+       }
+
+		   for(int i = 0; i < friends.size(); ++i){
+			   List<List<String>> one = ProfNetwork.getFriends(esql, friends.get(i).get(0));
+			   options.addAll(one);
+			   for(int j = 0; j < one.size(); ++j){
+				   List<List<String>> two = ProfNetwork.getFriends(esql, one.get(j).get(0));
+				   options.addAll(two);
+           for(int k = 0; k < two.size(); ++k){
+              List<List<String>> three = ProfNetwork.getFriends(esql, two.get(k).get(0));
+              options.addAll(three);
+           }
+			   }
+		   }
+       
+		   for(int i = 0; i < options.size(); ++i){
+          if(options.get(i).get(0).equals(check)){
+            return true;
+          }
+       }
+       return false;
+	   }catch(Exception e){
+		   System.err.println(e.getMessage() );
+		   return false;
+	   }
   }
   
   private boolean passAction(java.awt.event.ActionEvent evt, String user, String pass, String newPass){
@@ -70,12 +111,21 @@ public class NetworkGUI extends JFrame{
     }
   }
   
+  private boolean deleteAction(String msgId, String user){
+    ProfNetwork.deleteMsg(esql, msgId, user);
+    return true;
+  }
+  
+  private boolean createAction(String user, String pass,String email, String name, String dob){
+    return ProfNetwork.createUser(esql, user, pass, email, name, dob);
+  }
+  
   private void exitAction(java.awt.event.ActionEvent evt){
     System.exit(0);
   }
   
   private void viewStart(){
-      
+        
       JLabel userLabel = new JLabel("Username: ");
       JLabel passLabel = new JLabel("Password: ");
       final JTextField userField = new JTextField(20);
@@ -114,7 +164,7 @@ public class NetworkGUI extends JFrame{
           if(loginAction(evt, userField.getText(), passField.getText())){
             getContentPane().removeAll();
             getContentPane().repaint();
-            viewProfile(userField.getText());
+            viewMenu(userField.getText());
           }
         }
       });
@@ -151,7 +201,8 @@ public class NetworkGUI extends JFrame{
   
   private void viewMenu(final String user){
       JButton friends = new JButton("Friends List");
-      JButton profile = new JButton("Update Profile");
+      JButton profile = new JButton("View Profile");
+      JButton requests = new JButton("View Friend Requests");
       JButton sendMsg = new JButton("Send A Message");
       JButton viewMsg = new JButton("View Messages");
       JButton search = new JButton("Search Profiles");
@@ -160,6 +211,9 @@ public class NetworkGUI extends JFrame{
 
       friends.setLocation(400,100);
       friends.setSize(200,30);
+      
+      requests.setLocation(400,100);
+      requests.setSize(200,30);
 
       profile.setLocation(600,100);
       profile.setSize(200,30);
@@ -184,6 +238,14 @@ public class NetworkGUI extends JFrame{
           getContentPane().removeAll();
           getContentPane().repaint();
           viewFriends(user);
+        }
+      });
+      
+      requests.addActionListener(new java.awt.event.ActionListener(){
+        public void actionPerformed(java.awt.event.ActionEvent evt){
+          getContentPane().removeAll();
+          getContentPane().repaint();
+          viewRequests(user);
         }
       });
       
@@ -215,7 +277,7 @@ public class NetworkGUI extends JFrame{
         public void actionPerformed(java.awt.event.ActionEvent evt){
           getContentPane().removeAll();
           getContentPane().repaint();
-          viewSearch(user,0);
+          viewSearch(user,0, "");
         }
       });
       
@@ -245,6 +307,7 @@ public class NetworkGUI extends JFrame{
       JPanel buttons_panel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
       buttons_panel.add(friends);
       buttons_panel.add(profile);
+      buttons_panel.add(requests);
       buttons_panel.add(sendMsg);
       buttons_panel.add(viewMsg);
       buttons_panel.add(search);
@@ -296,21 +359,28 @@ public class NetworkGUI extends JFrame{
 
       b3.setLocation(400,300);
       b3.setSize(200,30);
-      //
+      
       b2.addActionListener(new java.awt.event.ActionListener(){
         public void actionPerformed(java.awt.event.ActionEvent evt){
-          //TODO: try adding user
-          // false if exists
-          // true if successful add
-          //getContentPane().removeAll();
-          //getContentPane().repaint();  
-            
-            
-            //call viewCreateUser(int num)
+            getContentPane().removeAll();
+            getContentPane().repaint();
+            boolean created = createAction(userField.getText(), passField.getText(), emailField.getText(), nameField.getText(), bdayField.getText());
+            if(created){
+              getContentPane().removeAll();
+              getContentPane().repaint();
+              currentUser = userField.getText();
+              viewMenu(currentUser);
+            }
+            else{
+              getContentPane().removeAll();
+              getContentPane().repaint();
+              viewCreateUser(3);
+            }
             //value passed in determines what label is shown
             // 0  - Create New account
             // 1  - Account created
             // 2  - User already exists
+            // 3  - User error
             
         }
       });
@@ -338,6 +408,10 @@ public class NetworkGUI extends JFrame{
       {
           label = new JLabel("User exists", icon, JLabel.LEFT);
       }
+      else if (user_created_state == 3)
+      {
+          label = new JLabel("Error", icon, JLabel.LEFT);
+      }
  
       JPanel logo_panel = new JPanel();
       logo_panel.add(label);
@@ -364,14 +438,9 @@ public class NetworkGUI extends JFrame{
       
       pack();
       setVisible(true);
-  
-  
-  
-  
   }
   
   private void viewFriends(String user){
-    //viewMenu(user);
     System.out.println("Go to Friends List");
     List<List<String>>results = new ArrayList<List<String>>();
     results = ProfNetwork.getFriends(esql, user);
@@ -390,29 +459,122 @@ public class NetworkGUI extends JFrame{
     for(int i = 0; i < results.size(); ++i){
       friends[i] = new JButton(results.get(i).get(0));
       friends[i].setSize(200,30);
+      final String temp = results.get(i).get(0);
+      friends[i].addActionListener(new java.awt.event.ActionListener(){
+        public void actionPerformed(java.awt.event.ActionEvent evt){
+          getContentPane().removeAll();
+          getContentPane().repaint();
+          viewProfile(temp);
+        }
+      });
       friends_panel.add(friends[i]);
     }
     getContentPane().add(friends_panel, BorderLayout.CENTER);
+    JButton cancel = new JButton("Go Back");
+    cancel.setSize(200,30);
+    
+    //cancel button b1
+      cancel.addActionListener(new java.awt.event.ActionListener(){
+        public void actionPerformed(java.awt.event.ActionEvent evt){
+            //go back to menu
+            getContentPane().removeAll();
+            getContentPane().repaint();
+            viewMenu(currentUser);
+        }
+      });
+    JPanel end = new JPanel();
+    end.add(cancel);
+    getContentPane().add(end, BorderLayout.SOUTH);
     
     pack();
     setVisible(true);
   }
   
-  //TRISH HAS
-  private void viewProfile(String user){
-    viewMenu(user);
-   // pack();
+  private void viewProfile(final String user){
+    String welcome_mes = user + "'s Profile";
+    System.out.println(welcome_mes);
+    ImageIcon user_icon = new ImageIcon("../images/usericon.png");
+    JLabel label = new JLabel(welcome_mes, user_icon, JLabel.LEFT);
+    JPanel user_panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    user_panel.add(label);
+    getContentPane().add(user_panel, BorderLayout.NORTH);
+    
+    List<String> info = ProfNetwork.getUserInfo(esql, user);
+    JLabel username;
+    JLabel email;
+    JLabel name;
+    JLabel dob;
+    if(info != null){
+      username = new JLabel("Username: " + info.get(0));
+      email = new JLabel("Email: " + info.get(2));
+      name = new JLabel("Name: " + info.get(3));
+      dob = new JLabel("Date of Birth: " + info.get(4));
+    }
+    else{
+      username = new JLabel("Username: ");
+      email = new JLabel("Email: ");
+      name = new JLabel("Name: ");
+      dob = new JLabel("Date of Birth: ");
+    }
+    JButton cancel = new JButton("Go Back");
+    cancel.setSize(200,30);
+    //Check if can add friend
+    JButton addFriend = new JButton("Add Friend");
+    addFriend.setSize(200,30);
+    
+    addFriend.addActionListener(new java.awt.event.ActionListener(){
+      public void actionPerformed(java.awt.event.ActionEvent evt){
+        getContentPane().removeAll();
+        getContentPane().repaint();
+        ProfNetwork.addFriend(esql, currentUser, user);
+        final String reload = user;
+        viewProfile(reload);
+      }
+    });
+    
+    JButton removeFriend = new JButton("Remove Friend");
+    removeFriend.setSize(200,30);
+    
+    removeFriend.addActionListener(new java.awt.event.ActionListener(){
+      public void actionPerformed(java.awt.event.ActionEvent evt){
+        getContentPane().removeAll();
+        getContentPane().repaint();
+       // ProfNetwork.removeFriend(esql, currentUser, user);
+        viewProfile(user);
+      }
+    });
+    
+    //cancel button b1
+      cancel.addActionListener(new java.awt.event.ActionListener(){
+        public void actionPerformed(java.awt.event.ActionEvent evt){
+            //go back to menu
+            getContentPane().removeAll();
+            getContentPane().repaint();
+            viewMenu(currentUser);
+        }
+      });
+      
+    JPanel infoPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    infoPanel.add(username);
+    infoPanel.add(email);
+    infoPanel.add(name);
+    infoPanel.add(dob);
+    getContentPane().add(infoPanel, BorderLayout.CENTER);
+    
+    JPanel optionsPanel = new JPanel();
+    optionsPanel.add(cancel);
+    if(!currentUser.equals(user) && canAddFriend(currentUser, user)){
+      optionsPanel.add(addFriend);
+    }
+    getContentPane().add(optionsPanel, BorderLayout.SOUTH);
+    pack();
     setVisible(true);
   }
   
   
   private void viewMsgSend(final String user, int msg_state){
-      JLabel userLabel = new JLabel("To Username:");
+      JLabel userLabel = new JLabel("To:");
       final JTextField userField = new JTextField(20);
-      
-      ////////////////////////////////////////////////
-      ///////IF WANT MULTI LINE. USE TEXTAREA///////////
-      //////////////////////////////////////////////
       final JTextField messField = new JTextField(100);
       userLabel.setBounds(400,400,100,30);
       userField.setBounds(400, 400, 100, 30);
@@ -431,11 +593,24 @@ public class NetworkGUI extends JFrame{
       //send button
       b2.addActionListener(new java.awt.event.ActionListener(){
         public void actionPerformed(java.awt.event.ActionEvent evt){
-          //TODO: ADD FUNCTION TO SEND MESSAGE TO SPECIFIED USER
-          //CHECK IF USER EXISTS
           getContentPane().removeAll();
           getContentPane().repaint();
-          viewMsgSend(user,1);
+          List<String> info = ProfNetwork.getUserInfo(esql, userField.getText());
+          if(info == null){
+            getContentPane().removeAll();
+          getContentPane().repaint();
+          
+            viewMsgSend(user, 0);
+          }
+          else{
+            boolean sent = ProfNetwork.sendMessage(esql, currentUser, userField.getText(), messField.getText());
+            if(sent){
+              getContentPane().removeAll();
+          getContentPane().repaint();
+          
+              viewMsgSend(user,1);
+            }
+          }
         }
       });
       //cancel search button
@@ -447,7 +622,6 @@ public class NetworkGUI extends JFrame{
         }
       });
   
-      
       ImageIcon icon = new ImageIcon("../images/networklogothing.png");
       JLabel label = new JLabel("Send Message", icon, JLabel.LEFT);
       JPanel logo_panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -480,13 +654,106 @@ public class NetworkGUI extends JFrame{
       setVisible(true);
   }
   
+  private void viewRequests(final String user){
+    List<List<String>> requests = ProfNetwork.getRequests(esql, currentUser);
+    for(int i = 0; i < requests.size(); ++i){
+      JPanel reqPanel = new JPanel();
+      final String req = requests.get(i).get(0);
+      String message = "<html>" + req +"<br></html>";
+      JLabel l = new JLabel(message);
+      JButton bt = new JButton("Accept");
+      bt.setSize(200,30);
+      JButton dt = new JButton("Reject");
+      dt.setSize(200,30);
+      bt.addActionListener(new java.awt.event.ActionListener(){
+        public void actionPerformed(java.awt.event.ActionEvent evt){
+            //go back to menu
+            getContentPane().removeAll();
+            getContentPane().repaint();
+            ProfNetwork.confirmFriend(esql, currentUser, req);
+            viewRequests(currentUser);
+        }
+      });
+      dt.addActionListener(new java.awt.event.ActionListener(){
+        public void actionPerformed(java.awt.event.ActionEvent evt){
+          getContentPane().removeAll();
+          getContentPane().repaint();
+          ProfNetwork.rejectFriend(esql, currentUser, req);
+          viewRequests(currentUser);
+        }
+      });
+      reqPanel.add(l);
+      reqPanel.add(bt);
+      reqPanel.add(dt);
+      getContentPane().add(reqPanel, BorderLayout.CENTER);
+    }
+    JButton cancel = new JButton("Go Back");
+    cancel.setSize(200,30);
+    
+    //cancel button b1
+      cancel.addActionListener(new java.awt.event.ActionListener(){
+        public void actionPerformed(java.awt.event.ActionEvent evt){
+            //go back to menu
+            getContentPane().removeAll();
+            getContentPane().repaint();
+            viewMenu(currentUser);
+        }
+      });
+    JPanel end = new JPanel();
+    end.add(cancel);
+    getContentPane().add(end, BorderLayout.SOUTH);
+    pack();
+    setVisible(true);
+  }
   private void viewMsgView(final String user){
-    viewMenu(user);
-   // pack();
+    List<List<String>> messages = ProfNetwork.getMessages(esql, currentUser);
+    System.out.println(messages.size() + " messages");
+    JPanel msgPanel = new JPanel();
+    for(int i = 0; i < messages.size(); ++i){
+      String receiver = messages.get(i).get(0);
+      String sender = messages.get(i).get(1);
+      String time = messages.get(i).get(2);
+      String content = messages.get(i).get(3);
+      String all = "<html><body style='width: 500px;'>To: " + receiver +"<br>"
+                   + "From: " + sender + "<br>"
+                   + time + "<br>"
+                   + content + "<br></body></html>";
+      final String id = messages.get(i).get(4);
+      JLabel tLabel = new JLabel(all);
+      msgPanel.add(tLabel);
+      JButton delete = new JButton("Delete");
+      delete.setSize(200,30);
+      delete.addActionListener(new java.awt.event.ActionListener(){
+        public void actionPerformed(java.awt.event.ActionEvent evt){
+          deleteAction(id, currentUser);
+          getContentPane().removeAll();
+          getContentPane().repaint();
+          viewMsgView(currentUser);
+        }
+      });
+      msgPanel.add(delete);
+    }
+    getContentPane().add(msgPanel, BorderLayout.CENTER);
+    JButton cancel = new JButton("Go Back");
+    cancel.setSize(200,30);
+    
+    //cancel button b1
+      cancel.addActionListener(new java.awt.event.ActionListener(){
+        public void actionPerformed(java.awt.event.ActionEvent evt){
+            //go back to menu
+            getContentPane().removeAll();
+            getContentPane().repaint();
+            viewMenu(currentUser);
+        }
+      });
+    JPanel end = new JPanel();
+    end.add(cancel);
+    getContentPane().add(end, BorderLayout.SOUTH);
+    pack();
     setVisible(true);
   }
   
-  private void viewSearch(final String user, int search_state){
+  private void viewSearch(final String user, int search_state, final String search){
 
       JLabel userLabel = new JLabel("User Search");
       final JTextField userField = new JTextField(20);
@@ -505,15 +772,10 @@ public class NetworkGUI extends JFrame{
       //search button
       b2.addActionListener(new java.awt.event.ActionListener(){
         public void actionPerformed(java.awt.event.ActionEvent evt){
-          /*
-          boolean success = false;
-          success = loginAction(evt, userField.getText(), passField.getText());
-          if(loginAction(evt, userField.getText(), passField.getText())){
-            getContentPane().removeAll();
-            getContentPane().repaint();
-            viewProfile(userField.getText());
+          List<String> result = ProfNetwork.getUserInfo(esql, userField.getText());
+          if(result != null){
+            viewSearch(currentUser, 1, result.get(0));
           }
-          * */
         }
       });
       //cancel search button
@@ -544,13 +806,22 @@ public class NetworkGUI extends JFrame{
       if(search_state == 0)
       {
         JLabel resultsLabel = new JLabel("No user found.");
-        results_panel.add(resultsLabel);
+        //results_panel.add(resultsLabel);
       }
       else if(search_state ==1)
       {
         JLabel resultsLabel = new JLabel("User found.");
+        JButton uButton = new JButton(search);
+        uButton.setSize(200,300);
+        uButton.addActionListener(new java.awt.event.ActionListener(){
+        public void actionPerformed(java.awt.event.ActionEvent evt){
+          getContentPane().removeAll();
+          getContentPane().repaint();
+          viewProfile(search);
+        }
+        });
         //display that users information
-        results_panel.add(resultsLabel);
+        results_panel.add(uButton);
       } 
       getContentPane().add(results_panel, BorderLayout.SOUTH);
       
